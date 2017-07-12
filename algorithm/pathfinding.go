@@ -10,14 +10,14 @@ import (
 )
 
 // Heuristic defines a template to make custom heuristics
-type Heuristic func(m *storage.Storage, start, end co.Interface) int
+type Heuristic func(m *storage.Interface, start, end co.Interface) int
 
-func distanceHeuristic(m *storage.Storage, start, end co.Interface) int {
+func distanceHeuristic(m *storage.Interface, start, end co.Interface) int {
 	return start.Distance(end)
 }
 
 // AStar implements the A* algorithm for hexagonal coordinates
-func AStar(m storage.Storage, h Heuristic, start, end co.Interface) {
+func AStar(m storage.Interface, h Heuristic, start, end co.Interface) ([]co.Interface, bool) {
 	fringe := make(PriorityQueue, 1)
 	expanded := make(map[co.Interface]interface{})
 
@@ -32,7 +32,7 @@ func AStar(m storage.Storage, h Heuristic, start, end co.Interface) {
 
 	for len(fringe) > 0 {
 		state := heap.Pop(&fringe).(*Item)
-		fmt.Println(state.value)
+		// fmt.Println(state.value)
 
 		if _, ok := expanded[state.value]; ok {
 			continue
@@ -41,9 +41,8 @@ func AStar(m storage.Storage, h Heuristic, start, end co.Interface) {
 		expanded[state.value] = nil
 
 		if reflect.DeepEqual(state.value, end) {
-			fmt.Println("hello")
 			fmt.Println(state.path)
-			return
+			return state.path, true
 		}
 
 		for _, n := range m.Neighbors(state.value) {
@@ -59,4 +58,5 @@ func AStar(m storage.Storage, h Heuristic, start, end co.Interface) {
 	}
 
 	fmt.Println("no path found")
+	return nil, false
 }

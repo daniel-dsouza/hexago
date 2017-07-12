@@ -4,19 +4,11 @@ import (
 	"github.com/daniel-dsouza/hexagon/coordinate"
 )
 
-// SimpleMap is a hashmap representation to store hex girds
-// type SimpleMap struct {
-// 	container map[coordinate.Interface]interface{}
-// }
-
+// SimpleMap is a hashmap representation of a hexagonal grid
 type SimpleMap map[coordinate.Interface]interface{}
 
 // NewSimpleMap makes a new simple map
 func NewSimpleMap() SimpleMap {
-	// return &SimpleMap{
-	// 	make(map[coordinate.Interface]interface{}),
-	// }
-
 	return make(SimpleMap)
 }
 

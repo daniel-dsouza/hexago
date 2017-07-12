@@ -5,7 +5,7 @@ import (
 	"github.com/daniel-dsouza/hexagon/storage"
 )
 
-func Reachable(storage storage.Storage, start co.Interface, movement int) []co.Interface {
+func Reachable(storage storage.Interface, start co.Interface, movement int) []co.Interface {
 	visited := map[co.Interface]interface{}{start: nil}
 	fringes := make([][]co.Interface, movement+1, movement+1)
 	for i := 1; i <= movement; i++ {

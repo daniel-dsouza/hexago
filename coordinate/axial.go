@@ -1,5 +1,9 @@
 package coordinate
 
+import (
+	"math"
+)
+
 // Axial coordinate with implied z, under x+y+z=0
 type Axial struct {
 	Q int
@@ -45,6 +49,23 @@ func (a Axial) GetNeighbors() []Interface {
 	return neighbors
 }
 
+// LinearInterpolation returns the hexagons (inclusive) between two hexagons
+func (a Axial) LinearInterpolation(c Interface) []Interface {
+	b := c.(Axial)
+	dist := a.Distance(b)
+	line := make([]Interface, dist+1)
+	line[0] = a
+
+	for i := 1; i <= dist; i++ {
+		line[i] = Axial{
+			Q: round(float64(a.Q) + (float64(b.Q)-float64(a.Q))*float64(i)/float64(dist)),
+			R: round(float64(a.R) + (float64(b.R)-float64(a.R))*float64(i)/float64(dist)),
+		}
+	}
+
+	return line
+}
+
 func abs(a int) int {
 	if a < 0 {
 		return -1 * a
@@ -61,4 +82,14 @@ func max(a, b, c int) int {
 	}
 
 	return c
+}
+
+func round(a float64) int {
+	c := math.Ceil(a)
+
+	if (a > 0 && c-a <= 0.5) || (a < 0 && c-a < 0.5) {
+		return int(c)
+	}
+
+	return int(math.Floor(a))
 }
