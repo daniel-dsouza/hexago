@@ -6,6 +6,6 @@ import "github.com/daniel-dsouza/hexagon/coordinate"
 type Interface interface {
 	Get(coordinate.Interface) (interface{}, bool)
 	Set(coordinate.Interface, interface{})
-	LinearInterpolation(coordinate.Interface) []coordinate.Interface
+	//LinearInterpolation(coordinate.Interface) []coordinate.Interface
 	Neighbors(coordinate.Interface) []coordinate.Interface
 }
