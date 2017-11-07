@@ -1,6 +1,6 @@
 package storage
 
-import "github.com/daniel-dsouza/hexagon/coordinate"
+import "github.com/daniel-dsouza/hexago/coordinate"
 
 // Interface defines the minimum information needed to be useful
 type Interface interface {

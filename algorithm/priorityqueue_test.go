@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	co "github.com/daniel-dsouza/hexagon/coordinate"
+	co "github.com/daniel-dsouza/hexago/coordinate"
 )
 
 func TestPriorityQueue(t *testing.T) {

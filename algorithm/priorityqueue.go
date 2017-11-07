@@ -1,7 +1,7 @@
 package algorithm
 
 import "container/heap"
-import "github.com/daniel-dsouza/hexagon/coordinate"
+import "github.com/daniel-dsouza/hexago/coordinate"
 
 type Item struct {
 	value    coordinate.Interface

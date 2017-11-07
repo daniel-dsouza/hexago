@@ -3,8 +3,8 @@ package algorithm
 import (
 	"testing"
 
-	co "github.com/daniel-dsouza/hexagon/coordinate"
-	"github.com/daniel-dsouza/hexagon/storage"
+	co "github.com/daniel-dsouza/hexago/coordinate"
+	"github.com/daniel-dsouza/hexago/storage"
 )
 
 func TestReachable(t *testing.T) {

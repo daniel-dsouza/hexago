@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"github.com/daniel-dsouza/hexagon/coordinate"
+	"github.com/daniel-dsouza/hexago/coordinate"
 	"math"
 )
 

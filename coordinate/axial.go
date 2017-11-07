@@ -1,8 +1,5 @@
 package coordinate
 
-import (
-	"math"
-)
 
 // Axial coordinate with implied z, under x+y+z=0
 type Axial struct {
@@ -13,9 +10,9 @@ type Axial struct {
 var axialDirections = [6]Axial{Axial{1, 0}, Axial{1, -1}, Axial{0, -1}, Axial{-1, 0}, Axial{-1, 1}, Axial{0, 1}}
 
 // GetAxialDirections returns the six axial directions starting from 0 degrees counter-clockwise
-func GetAxialDirections() [6]Axial {
-	return axialDirections
-}
+// func GetAxialDirections() [6]Axial {
+// 	return axialDirections
+// }
 
 // NewAxial creates a new Axial
 func NewAxial(q, r int) Axial {
@@ -42,7 +39,7 @@ func (a Axial) Distance(c Interface) int {
 func (a Axial) GetNeighbors() []Interface {
 	neighbors := make([]Interface, 6, 6)
 
-	for index, value := range GetAxialDirections() {
+	for index, value := range axialDirections {
 		neighbors[index] = a.add(value)
 	}
 
@@ -64,32 +61,4 @@ func (a Axial) LinearInterpolation(c Interface) []Interface {
 	}
 
 	return line
-}
-
-func abs(a int) int {
-	if a < 0 {
-		return -1 * a
-	}
-
-	return a
-}
-
-func max(a, b, c int) int {
-	if a > b && a > c {
-		return a
-	} else if b > c {
-		return b
-	}
-
-	return c
-}
-
-func round(a float64) int {
-	c := math.Ceil(a)
-
-	if (a > 0 && c-a <= 0.5) || (a < 0 && c-a < 0.5) {
-		return int(c)
-	}
-
-	return int(math.Floor(a))
 }
