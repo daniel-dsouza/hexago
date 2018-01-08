@@ -5,8 +5,8 @@ import (
 
 	"reflect"
 
-	co "github.com/daniel-dsouza/hexagon/coordinate"
-	"github.com/daniel-dsouza/hexagon/storage"
+	co "github.com/daniel-dsouza/hexago/coordinate"
+	"github.com/daniel-dsouza/hexago/storage"
 )
 
 func TestAStar(t *testing.T) {
