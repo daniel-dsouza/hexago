@@ -34,7 +34,7 @@ func (g *GeoStorage) AxialFromGeo(latitude, longitude float64) coordinate.Axial 
 	// would i fly around the world with this - no. But for a square mile it should be fine.
 
 	latitudeDifference := latitude - g.lat
-	longitudeDiffernece := longitude - g.lon
+	// longitudeDifference := longitude - g.lon
 
 	verticalOffset := 111131.77741377673104 / math.Pow(1+0.0033584313098335197297*math.Cos(2*latitudeDifference), 1.5)
 	horizontalOffset := 111506.26354049367285 * math.Cos(latitudeDifference) / math.Pow(1+0.0033584313098335197297*math.Cos(2*latitudeDifference), 0.5)
