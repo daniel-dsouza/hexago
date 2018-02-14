@@ -37,12 +37,14 @@ func computeOffset(lat, lon, north, east float64) (float64, float64) {
 // GetGeoNeighbors is based on Axial.GetNeighbors, but also computes the lat/lon
 func (geo Geo) GetGeoNeighbors() []Interface {
 	geoNeighbors := make([]Interface, 6, 6)
+	angles := []float64{math.Pi / 6, math.Pi / 2, 5 * math.Pi / 6, 7 * math.Pi / 6, 3 * math.Pi / 2, 11 * math.Pi / 6}
 
 	for index, value := range geo.GetNeighbors() {
+		newLat, newLon := computeRadialOffset(geo.Latitude, geo.Longitude, angles[index], 2.0)
 		geoNeighbors[index] = Geo{
 			value,
-			0, // latitude TODO: use geo.latitude and offset it.
-			0, // longitude TODO: use geo.longitude and offset it.
+			newLat, // latitude TODO: use geo.latitude and offset it.
+			newLon, // longitude TODO: use geo.longitude and offset it.
 		}
 	}
 
