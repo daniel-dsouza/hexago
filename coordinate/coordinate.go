@@ -4,12 +4,12 @@ import (
 	"math"
 )
 
-
 // Interface defines common methods for coordinates
 type Interface interface {
 	Distance(Interface) int
 	GetNeighbors() []Interface
 	LinearInterpolation(Interface) []Interface
+	ComputeDistanceHeading(Interface) (float64, float64)
 }
 
 func abs(a int) int {

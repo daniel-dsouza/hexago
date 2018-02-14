@@ -40,7 +40,7 @@ func AStar(m storage.Interface, h Heuristic, start, end co.Interface) ([]co.Inte
 
 		expanded[state.value] = nil
 
-		if reflect.DeepEqual(state.value, end) {
+		if reflect.DeepEqual(state.value, end) { // maybe change this to only compare q, r values.
 			fmt.Println(state.path)
 			return state.path, true
 		}

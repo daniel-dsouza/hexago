@@ -1,7 +1,7 @@
 package algorithm
 
 // ComputeNearestHex
-// Compute
+
 
 //PopulateMap returns a simplemap with all withing north <-> south, and west <-> east, starting from centerLat, centerLon
 // func PopulateMap(centerLat, centerLon, northLat, southLat, westLon, eastLon float64) storage.SimpleMap {

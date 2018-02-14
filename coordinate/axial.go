@@ -1,5 +1,6 @@
 package coordinate
 
+import "math"
 
 // Axial coordinate with implied z, under x+y+z=0
 type Axial struct {
@@ -61,4 +62,35 @@ func (a Axial) LinearInterpolation(c Interface) []Interface {
 	}
 
 	return line
+}
+
+// ComputeDistanceHeading calculates the heading (radians) and distance from one hex to another.
+func (a Axial) ComputeDistanceHeading(end Interface) (float64, float64) {
+	// set end relative to start
+	adjusted := NewAxial(end.(Axial).Q-a.Q, end.(Axial).R-a.R)
+
+	smallopp := float64(abs(adjusted.Q)) * math.Sin(math.Pi/6)
+	smalladj := float64(abs(adjusted.Q)) * math.Cos(math.Pi/6)
+	bigadj, heading := 0.0, 0.0
+
+	// two cases
+	if (adjusted.Q > 0 && adjusted.R > 0) || (adjusted.Q < 0 && adjusted.R > 0) {
+		bigadj = float64(abs(adjusted.R)) + smallopp
+		angle := math.Atan(smalladj / bigadj)
+		if adjusted.R < 0 {
+			heading = math.Pi - angle
+		} else {
+			heading = 2*math.Pi - angle
+		}
+	} else {
+		bigadj = float64(abs(adjusted.R)) - smallopp
+		angle := math.Atan(smalladj / bigadj)
+		if adjusted.R < 0 {
+			heading = math.Pi + angle
+		} else {
+			heading = angle
+		}
+	}
+
+	return heading, math.Sqrt(bigadj*bigadj + smalladj*smalladj)
 }

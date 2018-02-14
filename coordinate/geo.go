@@ -1,6 +1,8 @@
 package coordinate
 
-import "math"
+import (
+	"math"
+)
 
 //Geo maps a latitude and longitude to a hexagonal cell
 type Geo struct {
@@ -37,7 +39,7 @@ func computeOffset(lat, lon, north, east float64) (float64, float64) {
 // GetGeoNeighbors is based on Axial.GetNeighbors, but also computes the lat/lon
 func (geo Geo) GetGeoNeighbors() []Interface {
 	geoNeighbors := make([]Interface, 6, 6)
-	angles := []float64{math.Pi / 6, math.Pi / 2, 5 * math.Pi / 6, 7 * math.Pi / 6, 3 * math.Pi / 2, 11 * math.Pi / 6}
+	angles := []float64{math.Pi / 6, math.Pi / 2, 5 * math.Pi / 6, 7 * math.Pi / 6, 3 * math.Pi / 2, 11 * math.Pi / 6} // FIX ME
 
 	for index, value := range geo.GetNeighbors() {
 		newLat, newLon := computeRadialOffset(geo.Latitude, geo.Longitude, angles[index], 2.0)
@@ -49,4 +51,16 @@ func (geo Geo) GetGeoNeighbors() []Interface {
 	}
 
 	return geoNeighbors
+}
+
+// NewGeo creates a new Geo relative to the center hexagon(with radius) of a hexagonal grid
+func NewGeo(center Geo, radius float64, coordinate Interface) Geo {
+	heading, distance := center.ComputeDistanceHeading(coordinate)
+	offsetLat, offsetLon := computeRadialOffset(center.Latitude, center.Longitude, heading, distance)
+
+	return Geo{
+		coordinate,
+		offsetLat,
+		offsetLon,
+	}
 }
