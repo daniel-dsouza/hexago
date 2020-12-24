@@ -14,7 +14,7 @@ func NewSimpleMap() SimpleMap {
 
 // Get returns a the key associated with a coordinate, or the
 func (s SimpleMap) Get(key coordinate.Interface) (interface{}, bool) {
-	if _, ok := s[key]; ok {
+	if _, ok := s[key]; !ok {
 		return nil, false
 	}
 
